@@ -1,39 +1,21 @@
- Caesar Cipher in Python
-This is a simple implementation of the Caesar Cipher, a classic encryption technique where each letter in the text is shifted by a fixed number of positions in the alphabet.
+def caesar_cipher(text, shift):
+    result = ""
+    for char in text:
+        if char.isalpha():
+            base = ord('A') if char.isupper() else ord('a')
+            new_char = chr((ord(char) - base + shift) % 26 + base)
+            result += new_char
+        else:
+            result += char
+    return result
 
- Features
-Encrypts and decrypts alphabetic messages
 
-Preserves case (uppercase/lowercase)
+message = input("Enter message: ")
+shift = int(input("Enter shift (0-25): "))
 
-Keeps non-alphabetic characters (spaces, punctuation, numbers) unchanged
+encrypted = caesar_cipher(message, shift)
+print("Encrypted message:", encrypted)
 
-Easy to use via command-line input
 
- How It Works
-Each letter in the input message is replaced by another letter shifted by a user-defined number. For example, with a shift of 3:
-
-A → D
-
-B → E
-
-X → A
-
-Z → C
-
-Decryption is done by shifting in the opposite direction (i.e., using a negative shift).
-
- Example
-text
-Copy
-Edit
-Enter message: Hello, World!
-Enter shift (0-25): 3
-Encrypted message: Khoor, Zruog!
-Decrypted message: Hello, World!
- How to Run
-Make sure you have Python 3 installed.
-
-Save the code in a file named caesar_cipher.py.
-
-Open a terminal or command prompt and run:
+decrypted = caesar_cipher(encrypted, -shift)
+print("Decrypted message:", decrypted)
